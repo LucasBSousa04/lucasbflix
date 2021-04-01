@@ -1,6 +1,5 @@
 // No React, tudo é componente. Até as páginas são componentes!
 import Menu from '../../components/Menu';
-import Footer from '../../components/Footer';
 import Carousel from '../../components/Carousel';
 import dadosIniciais from '../../data/dados_iniciais.json';
 import BannerMain from '../../components/BannerMain';
