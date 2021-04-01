@@ -23,3 +23,11 @@ body {
 a {
   color: inherit;
 } 
+
+#root {
+  /* Faz o root ficar com a altura ocupando 100% da tela*/
+  display: flex;
+  flex-direction: column;
+  /* Aqui, há 100% de altura - o padding do topo - o vh é o view height*/
+  min-height: calc(100vh - var(--bodyPaddingTop)); 
+}
