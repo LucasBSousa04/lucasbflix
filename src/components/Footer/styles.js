@@ -15,3 +15,5 @@ export const FooterBase = styled.footer`
     margin-bottom: 50px;
   }
 `;
+
+export default FooterBase;

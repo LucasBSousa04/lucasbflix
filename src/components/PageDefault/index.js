@@ -26,7 +26,7 @@ function PageDefault(props) {
               <Main>
                 {props.children}
               </Main>
-             <Footer />
+            <Footer />
         </>
         // </div>
     )
