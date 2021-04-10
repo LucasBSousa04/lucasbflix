@@ -8,7 +8,7 @@ function FormField({
 }) {
   const fieldId = `id_${name}`;
   //   Abaixo, cria-se um componente Tag cuja tag, obviamente, é o valor em aspas
-  const Tag = {as}
+  const Tag = { as };
   console.log(type, ' ', as);
 
   return (
