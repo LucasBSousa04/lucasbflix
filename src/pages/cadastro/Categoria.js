@@ -61,7 +61,7 @@ function CadastraCategoria() {
         >
           {/* NOTA IMPORTANTE: TODAS as props como parâmetro do componente devem ser passadas */}
           <FormField
-            label="Nome da categoria: "
+            label="Nome da categoria"
             value={values.nome}
             onChange={handleChange}
             name="nome"
@@ -69,7 +69,7 @@ function CadastraCategoria() {
           />
 
           <FormField
-            label="Descrição: "
+            label="Descrição"
             type="textarea"
             value={values.descricao}
             onChange={handleChange}
@@ -78,7 +78,7 @@ function CadastraCategoria() {
           />
 
           <FormField
-            label="Cor: "
+            label="Cor"
             type="color"
             value={values.cor}
             onChange={handleChange}
@@ -117,12 +117,16 @@ function CadastraCategoria() {
           <Button>
             Cadastrar
           </Button>
-
+          <div>
+            {/* Cargando */}
+            loading
+          </div>
         </form>
         <ul>
           {/* O constructor do método map segue o padrão (objeto, indice) */}
-          {categorias.map((categoria, indice) => (
-            <li key={`${categoria}${indice}`}>
+          {categorias.map((categoria) => (
+            // eslint-disable-next-line react/no-array-index-key
+            <li key={`${categoria.nome}`}>
               {categoria.nome}
             </li>
           ))}
