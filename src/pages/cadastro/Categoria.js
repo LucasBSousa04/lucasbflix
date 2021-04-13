@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-filename-extension */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../components/PageDefault';
 import FormField from '../../components/FormField';
@@ -34,6 +34,28 @@ function CadastraCategoria() {
     setValue(infosDoEvento.target.getAttribute('name'),
       infosDoEvento.target.value); // o getAttribute pega o valor do atributo "name"
   }
+
+  // Tem como parãmetros uma função e um array que indica quando a função ocorre.
+  useEffect(() => {
+    console.log('alo alo w brasil');
+    // setTimeout(() => {
+    //   setCategorias(
+    //     [...categorias,
+    //       {
+    //         id: 1,
+    //         nome: 'Front End',
+    //         descricao: 'Uma categoria show',
+    //         cor: '#6bd1ff',
+    //       },
+    //       {
+    //         id: 2,
+    //         nome: 'Back End',
+    //         descricao: 'Outra categoria show',
+    //         cor: '#6bd1ff',
+    //       }],
+    //   );
+    // }, 4 * 1000);
+  }, []);
 
   return (
     <>
@@ -117,11 +139,15 @@ function CadastraCategoria() {
           <Button>
             Cadastrar
           </Button>
-          <div>
-            {/* Cargando */}
-            loading
-          </div>
         </form>
+        {/* Sendo o array de categorias vazio, há a existência da div */}
+        {categorias.length === 0 && (
+        <div>
+          {/* Cargando */}
+          loading
+        </div>
+
+        )}
         <ul>
           {/* O constructor do método map segue o padrão (objeto, indice) */}
           {categorias.map((categoria) => (
