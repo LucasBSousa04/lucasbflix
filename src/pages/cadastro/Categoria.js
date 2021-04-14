@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable react/jsx-filename-extension */
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -38,6 +39,17 @@ function CadastraCategoria() {
   // Tem como parãmetros uma função e um array que indica quando a função ocorre.
   useEffect(() => {
     console.log('alo alo w brasil');
+    const URL_TOP = 'http://localhost:8080/categorias';
+    fetch(URL_TOP)
+      .then(async (respostaDoServidor) => {
+        const resposta = await respostaDoServidor.json();
+        console.log(resposta);
+        setCategorias([
+          ...resposta,
+        ]);
+        console.log(categorias);
+      });
+
     // setTimeout(() => {
     //   setCategorias(
     //     [...categorias,
@@ -154,6 +166,10 @@ function CadastraCategoria() {
             // eslint-disable-next-line react/no-array-index-key
             <li key={`${categoria.nome}`}>
               {categoria.nome}
+              {' '}
+              -
+              {' '}
+              {categoria.descricao}
             </li>
           ))}
 
