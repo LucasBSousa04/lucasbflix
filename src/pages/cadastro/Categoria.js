@@ -39,7 +39,7 @@ function CadastraCategoria() {
   // Tem como parãmetros uma função e um array que indica quando a função ocorre.
   useEffect(() => {
     console.log('alo alo w brasil');
-    const URL_TOP = 'http://localhost:8080/categorias';
+    const URL_TOP = 'https://lucasbflix.herokuapp.com/categorias';
     fetch(URL_TOP)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
