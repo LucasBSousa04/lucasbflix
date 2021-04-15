@@ -12,9 +12,12 @@ import categoriasRepository from '../../repositories/categorias';
 function Home() {
   useEffect(() => {
     categoriasRepository.getAllCategoriesWithVideos()
-      .then( =>{
-        
+      .then((categoriasComVideos) => {
+        console.log(categoriasComVideos);
       })
+      .catch((err) => {
+        console.log(err.mess);
+      });
   });
 
   return (
