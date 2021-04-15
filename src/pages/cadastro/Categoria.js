@@ -5,42 +5,28 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../components/PageDefault';
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
+import useForm from '../../hooks/useForm';
+import URL_BACKEND from '../../config';
+
+// Abaixo é um custom hook. É obrigatório nomeá-lo com "use".
 
 function CadastraCategoria() {
-  // Aqui, cria-se um valor default e o nome da função cujo retorno será
+  // Aqui, cria-se um valor default e o titulo da função cujo retorno será
   // seu parâmetro. que será seu novo estado
   const [categorias, setCategorias] = useState([]);
 
   const valoresIniciais = {
-    nome: '',
+    titulo: '',
     descricao: '',
     cor: '',
   };
 
-  const [values, setValues] = useState(valoresIniciais);
+  const { handleChange, values, clearForm } = useForm(valoresIniciais);
 
-  function setValue(chave, valor) {
-    // chave: nome, descricao, bla, bli
-    setValues({
-      ...values,
-      // Esses colchetes sõa análogos a uma chave. Essa é uma funcionalidade nova do Javascript.
-      [chave]: valor, // nome: 'valor'
-    });
-  }
-  function handleChange(infosDoEvento) {
-    // Aqui, com esse método, setamos o objeto {nomeDaCategoria} com o valor descrito
-    // nos parâmetros
-    // ATENÇÃO: o parâmetro infosDoEvento é justamente o evento em que houve
-    // o change, sendo o target o input em que ocorre o evento e o value o valor dele
-    setValue(infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value); // o getAttribute pega o valor do atributo "name"
-  }
-
-  // Tem como parãmetros uma função e um array que indica quando a função ocorre.
+  // Tem como parãmetros uma função e um array que indica quando a função ocorre (quando há
+  // mudanças no que é especificado).
   useEffect(() => {
-    console.log('alo alo w brasil');
-    const URL_TOP = 'https://lucasbflix.herokuapp.com/categorias';
-    fetch(URL_TOP)
+    fetch(URL_BACKEND)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
         console.log(resposta);
@@ -55,13 +41,13 @@ function CadastraCategoria() {
     //     [...categorias,
     //       {
     //         id: 1,
-    //         nome: 'Front End',
+    //         titulo: 'Front End',
     //         descricao: 'Uma categoria show',
     //         cor: '#6bd1ff',
     //       },
     //       {
     //         id: 2,
-    //         nome: 'Back End',
+    //         titulo: 'Back End',
     //         descricao: 'Outra categoria show',
     //         cor: '#6bd1ff',
     //       }],
@@ -74,7 +60,7 @@ function CadastraCategoria() {
       <PageDefault>
         <h1>
           Cadastro de categoria:
-          {values.nome}
+          {values.titulo}
         </h1>
         {/* ATENÇÃO: O ATRIBUTO QUE É PASSADO NO MÉTODO EM EVENTO SERVIRÁ COMO UM "THIS" DO
         EVENTO EM QUESTÃO */}
@@ -82,23 +68,23 @@ function CadastraCategoria() {
           // Impede uma nova requisição (reload)
           infosDoEvento.preventDefault();
           //   console.log('Você tentou enviar o form.');
-          //   console.log(values.nome);
+          //   console.log(values.titulo);
           // Os 3 pontos antes de categorias indicam que se mantém tudo aquilo que está emcategorias
           setCategorias(
             [...categorias,
               values],
           );
           //   console.log(categorias);
-          setValues(valoresIniciais);
-        //   console.log(values.nome, values.descricao, values.cor, 'teste');
+          clearForm();
+        //   console.log(values.titulo, values.descricao, values.cor, 'teste');
         }}
         >
           {/* NOTA IMPORTANTE: TODAS as props como parâmetro do componente devem ser passadas */}
           <FormField
-            label="Nome da categoria"
-            value={values.nome}
+            label="titulo da categoria"
+            value={values.titulo}
             onChange={handleChange}
-            name="nome"
+            name="titulo"
             type="text"
           />
 
@@ -164,8 +150,8 @@ function CadastraCategoria() {
           {/* O constructor do método map segue o padrão (objeto, indice) */}
           {categorias.map((categoria) => (
             // eslint-disable-next-line react/no-array-index-key
-            <li key={`${categoria.nome}`}>
-              {categoria.nome}
+            <li key={`${categoria.id}`}>
+              {categoria.titulo}
               {' '}
               -
               {' '}
