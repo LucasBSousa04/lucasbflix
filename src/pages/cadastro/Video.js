@@ -4,12 +4,14 @@ import PageDefault from '../../components/PageDefault';
 import useForm from '../../hooks/useForm';
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
+import videosRepository from '../../repositories/videos';
 
 function CadastroVideo() {
   const { handleChange, values } = useForm({
     // Abaixo estão os dadosIniciais
     titulo: 'Vídeo Padrão',
-    url: '',
+    url: 'https://www.youtube.com/watch?v=PWY2whuqcMw',
+    categoria: 'Front-end',
   });
   const history = useHistory();
 
@@ -20,10 +22,19 @@ function CadastroVideo() {
 
         <form onSubmit={(event) => {
           event.preventDefault();
-          // eslint-disable-next-line no-alert
-          alert('Vídeo cadastrado com sucesso!');
           // Faz o usuário voltar à Home.
-          history.push('/');
+
+          // Note que ele retorna o fetch, que é uma Promise.
+          videosRepository.create({
+            titulo: values.titulo,
+            url: values.url,
+            categoriaId: 1,
+          })
+          // O then fará com que quando o objeto for adicionado ao db
+            .then(() => {
+              console.log('Cadastrou com sucesso');
+              history.push('/');
+            });
         }}
         >
           <FormField
