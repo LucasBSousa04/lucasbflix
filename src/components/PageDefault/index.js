@@ -1,5 +1,6 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import propTypes from 'prop-types';
 import Menu from '../Menu';
 import Footer from '../Footer';
 
@@ -11,9 +12,12 @@ const Main = styled.main`
   padding-top: 50px;
   padding-left: 5%; 
   padding-right: 5%;
+  ${({ paddingAll }) => css`
+    padding: ${paddingAll};
+  `}
 `;
 
-function PageDefault(props) {
+function PageDefault({ children, paddingAll }) {
   return (
   // Ao invés de div, usa-se o <> vazio para evitar excesso de divs inutilizadas
   // <div>
@@ -21,8 +25,8 @@ function PageDefault(props) {
       {/* similar: */}
       {/* <React.Fragment></React.Fragment> */}
       <Menu />
-      <Main>
-        {props.children}
+      <Main paddingAll={paddingAll}>
+        {children}
       </Main>
       <Footer />
     </>
@@ -30,4 +34,13 @@ function PageDefault(props) {
   );
 }
 
+PageDefault.defaultProps = {
+  children: '',
+  paddingAll: null,
+};
+
+PageDefault.propTypes = {
+  children: propTypes.string,
+  paddingAll: propTypes.number,
+};
 export default PageDefault;

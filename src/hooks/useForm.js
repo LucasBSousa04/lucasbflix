@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export default function useForm(valoresIniciais) {
   const [values, setValues] = useState(valoresIniciais);
-
+  console.log('teste');
   function setValue(chave, valor) {
     // chave: titulo, descricao, bla, bli
     setValues({
@@ -12,12 +12,15 @@ export default function useForm(valoresIniciais) {
     });
   }
   function handleChange(infosDoEvento) {
+    console.log('teste2');
     // Aqui, com esse método, setamos o objeto {tituloDaCategoria} com o valor descrito
     // nos parâmetros
     // ATENÇÃO: o parâmetro infosDoEvento é justamente o evento em que houve
     // o change, sendo o target o input em que ocorre o evento e o value o valor dele
-    setValue(infosDoEvento.target.getAttribute('name'),
-      infosDoEvento.target.value); // o getAttribute pega o valor do atributo "name"
+    setValue(
+      infosDoEvento.target.getAttribute('name'),
+      infosDoEvento.target.value,
+    ); // o getAttribute pega o valor do atributo "name"
   }
   function clearForm() {
     setValues(valoresIniciais);

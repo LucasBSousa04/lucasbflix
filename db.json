@@ -2,10 +2,10 @@
     "categorias": [
       {
         "id": 1,
-        "titulo": "Front End",
+        "titulo": "React JS",
         "cor": "#6BD1FF",
         "link_extra": {
-          "text": "Formação de Front End na Alura",
+          "text": "Dicas, aulas e tutoriais da melhor biblioteca JS",
           "url": "https://www.alura.com.br/cursos-online-front-end"
         }
       },

@@ -6,7 +6,7 @@ import PageDefault from '../../components/PageDefault';
 import FormField from '../../components/FormField';
 import Button from '../../components/Button';
 import useForm from '../../hooks/useForm';
-import URL_BACKEND from '../../config';
+import config from '../../config';
 
 // Abaixo é um custom hook. É obrigatório nomeá-lo com "use".
 
@@ -26,7 +26,8 @@ function CadastraCategoria() {
   // Tem como parãmetros uma função e um array que indica quando a função ocorre (quando há
   // mudanças no que é especificado).
   useEffect(() => {
-    fetch(URL_BACKEND)
+    const URL_CATEGORIAS = `${config.URL_BACKEND}/categorias`;
+    fetch(URL_CATEGORIAS)
       .then(async (respostaDoServidor) => {
         const resposta = await respostaDoServidor.json();
         console.log(resposta);
@@ -150,12 +151,10 @@ function CadastraCategoria() {
           {/* O constructor do método map segue o padrão (objeto, indice) */}
           {categorias.map((categoria) => (
             // eslint-disable-next-line react/no-array-index-key
+            // FAZER A DESCRIÇÃO APARECER QUANDO ELA EXISTE
             <li key={`${categoria.id}`}>
               {categoria.titulo}
-              {' '}
-              -
-              {' '}
-              {categoria.descricao}
+              {'link_extra' in categoria && ` - ${categoria.link_extra.text}`}
             </li>
           ))}
 
